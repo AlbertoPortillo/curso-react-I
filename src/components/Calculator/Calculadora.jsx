@@ -13,15 +13,25 @@ export default function Calculadora() {
 
     //1 + 1 = 3
     function onCambio(key){
+        const texto_nuevo = ""+result
         if(finish){
             setFinish(false)
             setResult(key)
         }else{
-            setResult(result + key)
+            setResult(String(texto_nuevo + key))
+        }
+    }
+    
+    function onKeyPush(event){
+        if(Number(event.key)){
+            onCambio(event.key)
         }
     }
 
-    //agregar un useEffect para escuchar las teclas *Solo numeros*
+    React.useEffect(() => {
+        window.addEventListener('keyup', onKeyPush);
+        return () => window.removeEventListener('keyup', onKeyPush);
+    }, [onKeyPush]);
 
     function pressOperador(key){
         if(operator){
