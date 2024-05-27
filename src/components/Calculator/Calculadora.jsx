@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Grid, TextField} from '@mui/material'
+
 import Botton from './Botton'
 import Pantalla from './Pantalla'
+
 export default function Calculadora() {
     const [result, setResult] = React.useState('');
     const [beforeValue, setbeforeValue] = React.useState(0);
     const [operator, setOperator] = React.useState(null);
     const [finish, setFinish] = React.useState(false)
     
+
+    //1 + 1 = 3
     function onCambio(key){
         if(finish){
             setFinish(false)
@@ -16,6 +20,8 @@ export default function Calculadora() {
             setResult(result + key)
         }
     }
+
+    //agregar un useEffect para escuchar las teclas *Solo numeros*
 
     function pressOperador(key){
         if(operator){
@@ -75,9 +81,9 @@ export default function Calculadora() {
     }
 
     return (
-        <Grid container spacing={2} height={'80%'} width={'40%'} sx={{ bgcolor: 'grey' }} >
+        <Grid container spacing={2} marginLeft={'25%'} height={'50vh'} width={'40%'} sx={{ bgcolor: 'gray' }} >
 
-            <Pantalla texto={result} size={12} />
+            <Pantalla texto={result} />
 
             <Botton accion={onCambio} texto="1" />
             <Botton accion={onCambio} texto="2" />
